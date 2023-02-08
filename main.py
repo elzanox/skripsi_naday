@@ -19,8 +19,8 @@ with open("yolo_conf/classes.txt", "r") as f:
 example_url = ['https://picsum.photos/200/300.jpg']
 
 #get source from url
-url = example_url[0]
-# url = 'http://192.168.43.209' #ip address local esp32
+# url = example_url[0]
+url = 'http://192.168.43.184/640x480.jpg' #ip address local esp32
 
 # #get surce from videos
 # path_videos = 'media/gun_test5.mp4'
@@ -42,7 +42,7 @@ while True:
     # _, img = cap.read() 
          
     #from photos
-    img  = cv2.imread(path_photos)
+    # img  = cv2.imread(path_photos)
     
     height, width,_ = img.shape
     blob = cv2.dnn.blobFromImage(img, 1/255, (416, 416), (0,0,0), swapRB=True, crop=False)
