@@ -57,7 +57,7 @@ setup()
     }
     Serial.println("camera initialize success");
     pinMode(flashLED,OUTPUT);
-    digitalWrite(flashLED,50);
+    digitalWrite(flashLED,HIGH);
     Serial.println("FLASH LED ON");
   }
 

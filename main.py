@@ -24,8 +24,8 @@ with open("yolo_conf/classes-pam.txt", "r") as f:
 example_url = ['https://picsum.photos/200/300.jpg']
 
 #get source from url
-url = example_url[0]
-# url = 'http://192.168.137.184/640x480.jpg' #ip address local esp32
+# url = example_url[0]
+url = 'http://192.168.137.12/640x480.jpg' #ip address local esp32
 
 # #get surce from videos
 # path_videos = 'media/gun_test5.mp4'
@@ -38,16 +38,16 @@ font = cv2.FONT_HERSHEY_PLAIN
 colors = np.random.uniform(0, 255, size=(100, 3))
 
 while True:
-    # #from url photos
-    # cap = urllib.request.urlopen(url)
-    # imgz= np.array(bytearray(cap.read()),dtype=np.uint8)
-    # img = cv2.imdecode(imgz,-1)
+    #from url photos
+    cap = urllib.request.urlopen(url)
+    imgz= np.array(bytearray(cap.read()),dtype=np.uint8)
+    img = cv2.imdecode(imgz,-1)
     
     #from videos
     # _, img = cap.read() 
          
-    #from photos
-    img  = cv2.imread(path_photos)
+    # #from photos
+    # img  = cv2.imread(path_photos)
     
     height, width,_ = img.shape
     imgs = img.copy()
