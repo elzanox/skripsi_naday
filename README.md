@@ -1,1 +1,0 @@
-# skripsi_naday

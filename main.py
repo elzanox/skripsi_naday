@@ -31,23 +31,23 @@ url = example_url[0]
 # path_videos = 'media/gun_test5.mp4'
 # cap = cv2.VideoCapture(path_videos)
 
-#  #get surce from photos
-# path_photos = 'media/test.jpg'
+ #get surce from photos
+path_photos = 'media/test2.jpeg'
 
 font = cv2.FONT_HERSHEY_PLAIN
 colors = np.random.uniform(0, 255, size=(100, 3))
 
 while True:
-    #from url photos
-    cap = urllib.request.urlopen(url)
-    imgz= np.array(bytearray(cap.read()),dtype=np.uint8)
-    img = cv2.imdecode(imgz,-1)
+    # #from url photos
+    # cap = urllib.request.urlopen(url)
+    # imgz= np.array(bytearray(cap.read()),dtype=np.uint8)
+    # img = cv2.imdecode(imgz,-1)
     
     #from videos
     # _, img = cap.read() 
          
     #from photos
-    # img  = cv2.imread(path_photos)
+    img  = cv2.imread(path_photos)
     
     height, width,_ = img.shape
     imgs = img.copy()
