@@ -1,0 +1,8 @@
+urllib3
+scipy
+numpy
+opencv-python
+opencv-contrib-python
+imutils
+requests
+pyautogui

@@ -2,7 +2,6 @@ import cv2
 import urllib.request
 import numpy as np
 import os
-import time
 from datetime import datetime
 import pathlib
 dir = pathlib.Path().absolute()
