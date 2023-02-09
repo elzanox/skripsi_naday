@@ -1,26 +1,32 @@
 import cv2
 import urllib.request
 import numpy as np
+import os
+import time
+from datetime import datetime
+import pathlib
+dir = pathlib.Path().absolute()
+print(dir)
 
-net = cv2.dnn.readNet('yolo_conf/cfgw.weights', 'yolo_conf/cfg.cfg')
+net = cv2.dnn.readNet('yolo_conf/PAM.weights', 'yolo_conf/yolov3_training.cfg')
 
 #if you use nvidia gpu
-net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+# net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+# net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
 
-# #if you use intel or amd gpu
-# net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
-# net.setPreferableTarget(cv2.dnn.DNN_TARGET_OPENCL)
+#if you use intel or amd gpu
+net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
+net.setPreferableTarget(cv2.dnn.DNN_TARGET_OPENCL)
 
 classes = []
-with open("yolo_conf/classes.txt", "r") as f:
+with open("yolo_conf/classes-pam.txt", "r") as f:
     classes = f.read().splitlines() 
 
 example_url = ['https://picsum.photos/200/300.jpg']
 
 #get source from url
-# url = example_url[0]
-url = 'http://192.168.43.184/640x480.jpg' #ip address local esp32
+url = example_url[0]
+# url = 'http://192.168.137.184/640x480.jpg' #ip address local esp32
 
 # #get surce from videos
 # path_videos = 'media/gun_test5.mp4'
@@ -45,6 +51,7 @@ while True:
     # img  = cv2.imread(path_photos)
     
     height, width,_ = img.shape
+    imgs = img.copy()
     blob = cv2.dnn.blobFromImage(img, 1/255, (416, 416), (0,0,0), swapRB=True, crop=False)
     net.setInput(blob)
     output_layers_names = net.getUnconnectedOutLayersNames()
@@ -95,6 +102,12 @@ while True:
     key = cv2.waitKey(1)
     if key==27:
         break
+    if key==32:
+        ts = datetime.timestamp(datetime.now())
+        IN = str(ts) + ".jpg"
+        dataset_name = os.path.join(dir,'dataset',IN)
+        cv2.imwrite(dataset_name, imgs)
+        print('Pengambilan dataset {} berhasil'.format(IN))
 
 cap.release()
 cv2.destroyAllWindows()
