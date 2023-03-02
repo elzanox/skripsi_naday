@@ -7,7 +7,7 @@ import pathlib
 dir = pathlib.Path().absolute()
 print(dir)
 
-net = cv2.dnn.readNet('yolo_conf/PAM.weights', 'yolo_conf/yolov3_training.cfg')
+net = cv2.dnn.readNet('yolo_conf/10022023-yolov4-tiny-custom/custom_config_pam_v4_20000.weights', 'yolo_conf/10022023-yolov4-tiny-custom/custom_config_pam_v4.cfg')
 
 #if you use nvidia gpu
 # net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
@@ -18,7 +18,7 @@ net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_OPENCL)
 
 classes = []
-with open("yolo_conf/classes-pam.txt", "r") as f:
+with open("yolo_conf/classes.txt", "r") as f:
     classes = f.read().splitlines() 
 
 example_url = ['https://picsum.photos/200/300.jpg']
@@ -32,7 +32,7 @@ url = 'http://192.168.137.12/640x480.jpg' #ip address local esp32
 # cap = cv2.VideoCapture(path_videos)
 
  #get surce from photos
-path_photos = 'media/test2.jpeg'
+path_photos = 'media/test.jpg'
 
 font = cv2.FONT_HERSHEY_PLAIN
 colors = np.random.uniform(0, 255, size=(100, 3))
@@ -91,8 +91,8 @@ while True:
             center_rect = (center_x,center_y)
             color = colors[i]
             cv2.rectangle(img, (x,y), (x+w, y+h), color, 2)
-            cv2.putText(img,label, (x,y), font, 1, (0,255,0), 2)
-            cv2.putText(img,confidence_print, (x+50,y), font, 1, (0,255,0), 2)
+            cv2.putText(img,label, (x,y-40), font, 3, (0,0,255), 3)
+            # cv2.putText(img,confidence_print, (x+50,y), font, 1, (0,255,0), 2)
             cv2.circle(img, center_rect, radius=1, color=(0, 0, 255), thickness=2)
     
     print(daftar)
